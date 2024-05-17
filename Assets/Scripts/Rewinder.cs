@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,15 +6,36 @@ using UnityEngine;
 public class Rewinder : MonoBehaviour
 {
     public static Rewinder Singleton;
-    List<IRewindable> rewindables;
+    public List<IRewindable> rewindables;
     bool isRewinding = false;
+
+    public Action OnRewindStart;
+    public Action OnRewindEnd;
     private void Awake()
     {
+        Singleton = this;
         rewindables = new List<IRewindable>();
     }
     private void Update()
     {
-        isRewinding = Input.GetKey(KeyCode.K);
+        bool GetRewindKey = Input.GetKey(KeyCode.K);
+        if((isRewinding != GetRewindKey) && isRewinding)
+        {
+            OnRewindEnd?.Invoke();
+            foreach (IRewindable item in rewindables)
+            {
+                item.OnRewindEnd();
+            }
+        }
+        else if ((isRewinding != GetRewindKey) && !isRewinding)
+        {
+            OnRewindStart?.Invoke();
+            foreach (IRewindable item in rewindables)
+            {
+                item.OnRewindStart();
+            }
+        }
+        isRewinding = GetRewindKey;
     }
     private void FixedUpdate()
     {

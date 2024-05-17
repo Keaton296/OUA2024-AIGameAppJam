@@ -6,4 +6,7 @@ public interface IRewindable
 {
     void Rewind();
     void Record();
+    void OnRewindStart();
+    void OnRewindEnd();
+
 }
