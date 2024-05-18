@@ -7,6 +7,7 @@ public class PosRotRewindable : MonoBehaviour,IRewindable
     [SerializeField] private Rigidbody rb;
     private List<Vector3> positionRecords;
     private List<Quaternion> rotationRecords;
+    [SerializeField] int captureCount = 400; 
     void Awake()
     {
         positionRecords = new List<Vector3>();
@@ -41,10 +42,10 @@ public class PosRotRewindable : MonoBehaviour,IRewindable
     {
         positionRecords.Insert(0, transform.position);
         rotationRecords.Insert(0, transform.rotation);
-        if (positionRecords.Count > 100)
+        if (positionRecords.Count > captureCount)
         {
-            positionRecords.RemoveAt(100);
-            rotationRecords.RemoveAt(100);
+            positionRecords.RemoveAt(captureCount);
+            rotationRecords.RemoveAt(captureCount);
         }
     }
 

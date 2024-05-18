@@ -33,12 +33,9 @@ public class Rewinder : MonoBehaviour
             foreach (IRewindable item in rewindables)
             {
                 item.OnRewindStart();
-            }
+            } 
         }
         isRewinding = GetRewindKey;
-    }
-    private void FixedUpdate()
-    {
         if (isRewinding)
         {
             foreach (IRewindable item in rewindables)
@@ -48,7 +45,7 @@ public class Rewinder : MonoBehaviour
         }
         else
         {
-            foreach(IRewindable item in rewindables)
+            foreach (IRewindable item in rewindables)
             {
                 item.Record();
             }
