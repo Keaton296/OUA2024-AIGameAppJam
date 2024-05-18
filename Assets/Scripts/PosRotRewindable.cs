@@ -21,9 +21,9 @@ public class PosRotRewindable : MonoBehaviour,IRewindable
     {
         if (rb != null)
         {
+            rb.isKinematic = false;
             rb.velocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
-            rb.isKinematic = false;
         }
     }
 

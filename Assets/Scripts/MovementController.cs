@@ -14,8 +14,13 @@ public class MovementController : MonoBehaviour
     {
         if(rb.velocity.magnitude < moveSpeed)
         {
-            Vector3 movementVector = cameraPointTransform.forward;
-            movementVector.y = 0;
+            Vector3 movementVectorZ = cameraPointTransform.forward;
+            movementVectorZ.y = 0;
+            movementVectorZ.Normalize();
+            Vector3 movementVectorX = cameraPointTransform.right;
+            movementVectorX.y = 0;
+            movementVectorX.Normalize();
+            Vector3 movementVector = movementVectorZ * Input.GetAxisRaw("Vertical") + movementVectorX * Input.GetAxisRaw("Horizontal");
             movementVector.Normalize();
             rb.AddForce(movementVector * moveAcceleration);
         }
