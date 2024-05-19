@@ -4,7 +4,7 @@ public class MovementController : MonoBehaviour
 {
     [SerializeField] private Transform cameraPointTransform;
     private Rigidbody rb;
-    [SerializeField] float moveSpeed = 1f;
+    [SerializeField] float moveMaxSpeed = 1f;
     [SerializeField] float moveAcceleration = 1f;
     private void Awake()
     {
@@ -12,7 +12,7 @@ public class MovementController : MonoBehaviour
     }
     private void Update()
     {
-        if(rb.velocity.magnitude < moveSpeed)
+        if(rb.velocity.magnitude < moveMaxSpeed)
         {
             Vector3 movementVectorZ = cameraPointTransform.forward;
             movementVectorZ.y = 0;
