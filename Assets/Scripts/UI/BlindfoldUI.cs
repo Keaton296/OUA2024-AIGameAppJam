@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class BlindfoldUI : MonoBehaviour
 {
     [SerializeField] Image img;
+    [SerializeField] float durationSeconds;
     private void Awake()
     {
         img = GetComponent<Image>();
@@ -15,7 +16,7 @@ public class BlindfoldUI : MonoBehaviour
     }
     private IEnumerator Open()
     {
-        img.CrossFadeAlpha(0, 1f, true);
+        img.CrossFadeAlpha(0, durationSeconds, true);
         yield return new WaitForSeconds(1);
     }
 }

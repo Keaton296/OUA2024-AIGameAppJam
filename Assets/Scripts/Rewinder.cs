@@ -18,7 +18,7 @@ public class Rewinder : MonoBehaviour
     }
     private void Update()
     {
-        bool GetRewindKey = Input.GetKey(KeyCode.K);
+        bool GetRewindKey = Input.GetKey(KeyCode.Space);
         if((isRewinding != GetRewindKey) && isRewinding)
         {
             OnRewindEnd?.Invoke();
