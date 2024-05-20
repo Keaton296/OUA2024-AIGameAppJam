@@ -12,11 +12,21 @@ public class BlindfoldUI : MonoBehaviour
     }
     private void Start()
     {
-        StartCoroutine(Open());
+        StartCoroutine(Open(durationSeconds));
+        GameManager.Singleton.OnGameSuccess += OnGameSuccesHandler;
     }
-    private IEnumerator Open()
+    private IEnumerator Open(float duration)
     {
-        img.CrossFadeAlpha(0, durationSeconds, true);
-        yield return new WaitForSeconds(1);
+        img.CrossFadeAlpha(0, duration, true);
+        yield return new WaitForSeconds(duration);
+    }
+    private IEnumerator Close(float duration)
+    {
+        img.CrossFadeAlpha(1, duration, true);
+        yield return new WaitForSeconds(duration);
+    }
+    private void OnGameSuccesHandler()
+    {
+        StartCoroutine(Close(1));
     }
 }
